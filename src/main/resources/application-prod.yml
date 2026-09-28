@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+app:
+  mail:
+    from: admin@iitu.kz
+    retry-count: 5
+    timeout: 10s
+    enabled: true
+
+logging:
+  level:
+    kz.iitu: INFO

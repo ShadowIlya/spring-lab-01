@@ -1,0 +1,13 @@
+server:
+  port: 8081  # Можно оставить 8081 для dev-профиля, чтобы отличать от prod
+
+app:
+  mail:
+    from: dev-test@iitu.kz
+    retry-count: 1
+    timeout: 5s
+    enabled: false
+
+logging:
+  level:
+    kz.iitu: DEBUG
