@@ -1,6 +1,10 @@
 spring:
   application:
     name: spring-lab
+  messages:
+    basename: messages
+    encoding: UTF-8
+
 
 
 server:
@@ -18,4 +22,3 @@ app:
 logging:
   level:
     kz.iitu: INFO
-

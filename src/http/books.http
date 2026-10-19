@@ -1,0 +1,23 @@
+### list
+GET http://localhost:8080/api/books
+
+### get one
+GET http://localhost:8080/api/books/1
+
+### not found
+GET http://localhost:8080/api/books/999
+
+### create
+POST http://localhost:8080/api/books
+Content-Type: application/json
+
+{ "title": "Test Book", "author": "Test Author", "year": 2020, "genre": "NOVEL" }
+
+### invalid (empty title)
+POST http://localhost:8080/api/books
+Content-Type: application/json
+
+{ "title": "", "author": "Test Author", "year": 2020, "genre": "NOVEL" }
+
+### delete
+DELETE http://localhost:8080/api/books/1

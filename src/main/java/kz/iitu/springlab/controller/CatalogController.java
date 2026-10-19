@@ -1,0 +1,56 @@
+package kz.iitu.springlab.controller;
+
+import kz.iitu.springlab.service.CatalogService;
+import org.springframework.aop.support.AopUtils;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/lab4")
+public class CatalogController {
+
+    private final CatalogService catalogService;
+
+    public CatalogController(CatalogService catalogService) {
+        this.catalogService = catalogService;
+    }
+
+    @GetMapping("/item/{id}")
+    public String findById(@PathVariable long id) {
+        return catalogService.findById(id).map(Object::toString).orElse("Not found");
+    }
+
+    @GetMapping("/items")
+    public List<String> findAll(@RequestParam(defaultValue = "5") int limit) {
+        return catalogService.findAll(limit);
+    }
+
+    @DeleteMapping("/item/{id}")
+    public String remove(@PathVariable long id) {
+        return catalogService.remove(id);
+    }
+
+    // Task 4.1
+    @GetMapping("/proxy")
+    public Map<String, String> proxyInfo() {
+        return Map.of(
+                "className",  catalogService.getClass().getName(),
+                "superClass", catalogService.getClass().getSuperclass().getSimpleName(),
+                "isAopProxy", String.valueOf(AopUtils.isAopProxy(catalogService)),
+                "isCglib",    String.valueOf(AopUtils.isCglibProxy(catalogService)));
+    }
+
+    // Task 4.4 (before the fix)
+    @GetMapping("/remove-twice/{id}")
+    public String removeTwice(@PathVariable long id) {
+        return catalogService.removeTwice(id);
+    }
+
+    // Task 4.5 (after the fix)
+    @GetMapping("/remove-twice-fixed/{id}")
+    public String removeTwiceFixed(@PathVariable long id) {
+        return catalogService.removeTwiceFixed(id);
+    }
+}
